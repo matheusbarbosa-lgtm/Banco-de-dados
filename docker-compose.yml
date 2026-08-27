@@ -1,0 +1,31 @@
+name: sbd-lab
+
+services:
+  postgres-db:
+    image: postgres:17
+    container_name: postgres_container
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: bd_aula
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8"
+      TZ: America/Sao_Paulo
+      PGTZ: America/Sao_Paulo
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # Somente leitura: o servidor le os arquivos do repositorio,
+      # mas nao pode escrever neles.
+      - ./dados:/dados:ro
+      - ./sql:/sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U root -d bd_aula"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+volumes:
+  postgres_data:
