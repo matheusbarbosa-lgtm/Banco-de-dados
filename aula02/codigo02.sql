@@ -1,0 +1,173 @@
+-- Active: 1787782734809@@127.0.0.1@5432@bd_aula@public
+DROP TABLE IF EXISTS notas_alunos;
+
+CREATE TABLE notas_alunos(
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    aluno_nome TEXT NOT NULL,
+    turma TEXT NOT NULL,
+    disciplina TEXT NOT NULL,
+    nota INTEGER NOT NULL,
+    faltas INTEGER NOT NULL,
+    data_avaliacao DATE NOT NULL
+);
+
+SELECT * FROM notas_alunos;
+
+INSERT INTO notas_alunos (aluno_nome, turma, disciplina, nota, faltas, data_avaliacao) VALUES
+('Aluno 01','A','Matematica', 85, 2, '2025-09-01'),
+('Aluno 02','A','Matematica', 72, 0, '2025-09-01'),
+('Aluno 03','A','Matematica', 90, 1, '2025-09-01'),
+('Aluno 04','A','Matematica', 60, 3, '2025-09-01'),
+('Aluno 05','A','Matematica', 55, 0, '2025-09-01'),
+('Aluno 06','B','Matematica', 78, 2, '2025-09-02'),
+('Aluno 07','B','Matematica', 88, 1, '2025-09-02'),
+('Aluno 08','B','Matematica', 95, 0, '2025-09-02'),
+('Aluno 09','B','Matematica', 47, 4, '2025-09-02'),
+('Aluno 10','B','Matematica', 68, 2, '2025-09-02'),
+('Aluno 11','C','Portugues', 74, 1, '2025-09-03'),
+('Aluno 12','C','Portugues', 81, 0, '2025-09-03'),
+('Aluno 13','C','Portugues', 66, 2, '2025-09-03'),
+('Aluno 14','C','Portugues', 59, 3, '2025-09-03'),
+('Aluno 15','C','Portugues', 90, 0, '2025-09-03'),
+('Aluno 16','A','Portugues', 85, 0, '2025-09-04'),
+('Aluno 17','A','Portugues', 77, 1, '2025-09-04'),
+('Aluno 18','A','Portugues', 92, 0, '2025-09-04'),
+('Aluno 19','A','Portugues', 45, 5, '2025-09-04'),
+('Aluno 20','A','Portugues', 69, 2, '2025-09-04'),
+('Aluno 21','B','Sistemas', 88, 0, '2025-09-05'),
+('Aluno 22','B','Sistemas', 78, 2, '2025-09-05'),
+('Aluno 23','B','Sistemas', 83, 1, '2025-09-05'),
+('Aluno 24','B','Sistemas', 91, 0, '2025-09-05'),
+('Aluno 25','B','Sistemas', 55, 3, '2025-09-05'),
+('Aluno 26','C','Sistemas', 66, 2, '2025-09-06'),
+('Aluno 27','C','Sistemas', 72, 1, '2025-09-06'),
+('Aluno 28','C','Sistemas', 79, 0, '2025-09-06'),
+('Aluno 29','C','Sistemas', 84, 0, '2025-09-06'),
+('Aluno 30','C','Sistemas', 90, 0, '2025-09-06'),
+('Aluno 31','A','Matematica', 82, 1, '2025-09-07'),
+('Aluno 32','A','Matematica', 74, 2, '2025-09-07'),
+('Aluno 33','B','Portugues', 69, 1, '2025-09-07'),
+('Aluno 34','B','Portugues', 71, 0, '2025-09-07'),
+('Aluno 35','C','Matematica', 95, 0, '2025-09-08'),
+('Aluno 36','C','Matematica', 58, 4, '2025-09-08'),
+('Aluno 37','A','Sistemas', 63, 2, '2025-09-08'),
+('Aluno 38','A','Sistemas', 77, 1, '2025-09-08'),
+('Aluno 39','B','Sistemas', 85, 0, '2025-09-09'),
+('Aluno 40','B','Sistemas', 49, 5, '2025-09-09'),
+('Aluno 41','C','Portugues', 88, 0, '2025-09-09'),
+('Aluno 42','C','Portugues', 82, 1, '2025-09-09'),
+('Aluno 43','A','Matematica', 70, 2, '2025-09-10'),
+('Aluno 44','A','Matematica', 68, 3, '2025-09-10'),
+('Aluno 45','B','Portugues', 95, 0, '2025-09-10'),
+('Aluno 46','B','Portugues', 52, 4, '2025-09-10'),
+('Aluno 47','C','Sistemas', 76, 1, '2025-09-11'),
+('Aluno 48','C','Sistemas', 89, 0, '2025-09-11'),
+('Aluno 49','A','Sistemas', 94, 0, '2025-09-11'),
+('Aluno 50','B','Matematica', 61, 2, '2025-09-11');
+
+--Retorne os valores de aluno_nome, turma, disciplina e nota
+
+SELECT
+    aluno_nome AS "Alunos",
+    turma AS "Turma",
+    disciplina AS "Disciplina",
+    nota AS "Notas"
+FROM
+    notas_alunos;
+
+--COMANDO PARA RETORNAR (nota, disciplina, aluno_nome) na ordem das notas do tipo 'ASC'
+
+SELECT
+    aluno_nome AS "Alunos",
+    disciplina AS "Disciplina",
+    nota AS "Notas"
+FROM
+    notas_alunos
+ORDER BY
+    nota DESC
+LIMIT
+    10;
+
+-- Alunos com notas >=90
+
+SELECT
+    aluno_nome AS "Alunos",
+    disciplina AS "Disciplina",
+    nota AS "Notas"
+FROM
+    notas_alunos
+WHERE
+    nota >=90
+ORDER BY
+    nota DESC;
+
+SELECT
+    aluno_nome AS "Alunos",
+    disciplina AS "Disciplina",
+    nota AS "Notas"
+FROM
+    notas_alunos
+WHERE
+    nota <60
+ORDER BY
+    nota DESC;
+
+--Buscar alunos da discplina de 'Matematica' com notas >- 70
+SELECT
+    disciplina AS "Disciplina",
+    aluno_nome AS "Alunos",
+    turma AS "Turma",
+    nota AS "Nota"
+FROM
+    notas_alunos
+WHERE
+    disciplina = 'Matematica' AND nota >= 60
+ORDER BY
+    nota DESC;
+
+SELECT
+    disciplina AS "Disciplina",
+    aluno_nome AS "Alunos",
+    turma AS "Turma",
+    nota AS "Nota"
+FROM
+    notas_alunos
+WHERE
+    disciplina = 'Portugues' AND nota >= 60
+ORDER BY
+    nota DESC;
+
+SELECT
+    disciplina AS "Disciplina",
+    aluno_nome AS "Alunos",
+    turma AS "Turma",
+    nota AS "Nota"
+FROM
+    notas_alunos
+WHERE
+    disciplina = 'Sistemas' AND nota >= 60
+ORDER BY
+    nota DESC;
+
+SELECT
+    disciplina AS "Disciplina",
+    ROUND(AVG(nota),2) AS "Media_Notas"
+
+FROM
+    notas_alunos
+GROUP BY
+    disciplina;
+
+ /* 
+ AVG () Função usada para gerar a média de valores de um grupo
+COUNT (*) Soma a quantidade de linhas de um grupo
+*/
+
+SELECT
+    disciplina AS "Disciplina",
+    COUNT(*) AS "Avaliações",
+    ROUND(AVG(nota),2) AS "Media_Notas"
+FROM
+    notas_alunos
+GROUP BY
+    disciplina;    
