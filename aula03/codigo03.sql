@@ -126,3 +126,26 @@ FROM
     vendas_itens
 WHERE
     venda_id = 2001;
+
+SELECT
+    venda_id,
+    produto_id,
+    valor_unitario,
+    data_venda
+FROM
+    vendas_itens
+WHERE
+    (data_venda = '2025-09-01' OR data_venda = '2025-09-02') AND valor_unitario > 100;
+
+    
+SELECT
+    venda_id,
+    produto_id,
+    valor_unitario,
+    data_venda
+FROM
+    vendas_itens
+WHERE
+    (data_venda BETWEEN '2025-09-01' AND '2025-09-03') AND (valor_unitario >= 50 AND valor_unitario < 200)
+ORDER BY    
+    data_venda DESC;
